@@ -1,10 +1,17 @@
 package model;
 
-public class Adresse {
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
+@Embeddable
+public class Adresse {
+	@Column(name="adresse")
 	private String adresse;
+	@Column(name="code_postal", length = 200)
 	private String codePostal;
+	@Column(name="ville")
 	private String ville;
+	@Column(name="pays")
 	private String pays;
 
 	public Adresse(String adresse, String codePostal, String ville, String pays) {

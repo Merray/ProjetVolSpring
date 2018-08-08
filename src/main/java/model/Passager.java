@@ -1,55 +1,89 @@
 package model;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class Passager {
-
-	private Long id_passager;
-	private String nom_passager;
-	private String prenom_passager;
-	private Adresse adresse_passager;
-
-	public Passager(String nom_passager, String prenom_passager, Adresse adresse_passager) {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqAdherent")
+	@SequenceGenerator(name = "seqpassager", sequenceName = "seq_passager", initialValue = 100, allocationSize = 1)
+	@Column(name = "id_passager")
+	private Integer idPassager;
+	@Column(name = "nom_passager", length = 100, nullable = false)
+	private String nomPassager;
+	@Column(name = "prenom_passager", length = 150)
+	private String prenomPassager;
+	@Embedded
+    @AttributeOverrides({ @AttributeOverride(name = "adresse", column = @Column(name = "adresse_passager", length = 255)),
+            @AttributeOverride(name = "codePostal", column = @Column(name = "code_postal_passager", length = 6)),
+            @AttributeOverride(name = "ville", column = @Column(name = "ville_passager", length = 150)), 
+			@AttributeOverride(name = "pays", column = @Column(name = "pays_passager"))})
+	private Adresse adressePassager;
+	
+	public Passager(Integer idPassager, String nomPassager, String prenomPassager, Adresse adressePassager) {
 		super();
-		this.nom_passager = nom_passager;
-		this.prenom_passager = prenom_passager;
-		this.adresse_passager = adresse_passager;
+		this.idPassager = idPassager;
+		this.nomPassager = nomPassager;
+		this.prenomPassager = prenomPassager;
+		this.adressePassager = adressePassager;
 	}
 
-	
-	
+	public Passager(String nomPassager, String prenomPassager, Adresse adressePassager) {
+		super();
+		this.nomPassager = nomPassager;
+		this.prenomPassager = prenomPassager;
+		this.adressePassager = adressePassager;
+	}
+
 	public Passager() {
 		super();
 	}
 
-	public Long getId() {
-		return id_passager;
+	public Integer getIdPassager() {
+		return idPassager;
 	}
 
-	public void setId(Long id_passager) {
-		this.id_passager = id_passager;
+	public void setIdPassager(Integer idPassager) {
+		this.idPassager = idPassager;
 	}
 
-	public String getNom() {
-		return nom_passager;
+	public String getNomPassager() {
+		return nomPassager;
 	}
 
-	public void setNom(String nom_passager) {
-		this.nom_passager = nom_passager;
+	public void setNomPassager(String nomPassager) {
+		this.nomPassager = nomPassager;
 	}
 
-	public String getPrenom() {
-		return prenom_passager;
+	public String getPrenomPassager() {
+		return prenomPassager;
 	}
 
-	public void setPrenom(String prenom_passager) {
-		this.prenom_passager = prenom_passager;
+	public void setPrenomPassager(String prenomPassager) {
+		this.prenomPassager = prenomPassager;
 	}
 
-	public Adresse getAdresse() {
-		return adresse_passager;
+	public Adresse getAdressePassager() {
+		return adressePassager;
 	}
 
-	public void setAdresse(Adresse adresse_passager) {
-		this.adresse_passager = adresse_passager;
-	}
-
+	public void setAdressePassager(Adresse adressePassager) {
+		this.adressePassager = adressePassager;
+	} 
+	
+	
+	
+	
+	
 }
