@@ -1,20 +1,53 @@
 package model;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "client")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING, length = 2)
+@SequenceGenerator(name = "seqClient", sequenceName = "seq_client", initialValue = 1, allocationSize = 1)
 public abstract class Client {
 
-
-	private Long id_client;
-	private String typeClient;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqClient")
+	@Column(name = "id_client")
+	private Integer idClient;
+	@Column(name = "nom",  length = 150)
 	private String nom;
-	private Integer numeroTel;
-	private Integer numeroFax;
+	@Column(name="numero_tel")
+	private String numeroTel;
+	@Column(name="numero_fax")
+	private String numeroFax;
+	@Column(name="email")
 	private String email;
+	@Embedded
+	   @AttributeOverrides({ @AttributeOverride(name = "adresse", column = @Column(name = "adresse_client", length = 255)),
+	           @AttributeOverride(name = "codePostal", column = @Column(name = "code_postal_client", length = 6)),
+	           @AttributeOverride(name = "ville", column = @Column(name = "ville_client", length = 150)), 
+	            @AttributeOverride(name = "pays", column = @Column(name = "pays_client"))})
 	private Adresse adresse;
+	
+	@Deprecated
+	@OneToOne
 	private Login login;
 
-	public Client(String typeClient,String nom, Integer numeroTel, Integer numeroFax, String email, Adresse adresse) {
+	public Client(String typeClient,String nom, String numeroTel, String numeroFax, String email, Adresse adresse) {
 		super();
-		this.typeClient = typeClient;
 		this.nom = nom;
 		this.numeroTel = numeroTel;
 		this.numeroFax = numeroFax;
@@ -22,9 +55,8 @@ public abstract class Client {
 		this.adresse = adresse;
 	}
 
-	public Client(String typeClient, String nom, Integer numeroTel, Integer numeroFax, String email, Adresse adresse, Login login) {
+	public Client(String typeClient, String nom, String numeroTel, String numeroFax, String email, Adresse adresse, Login login) {
 		super();
-		this.typeClient = typeClient;
 		this.nom = nom;
 		this.numeroTel = numeroTel;
 		this.numeroFax = numeroFax;
@@ -37,14 +69,12 @@ public abstract class Client {
 		super();
 	}
 
-
-	public void setId(Long id_client) {
-		this.id_client = id_client;
-
+	public Integer getIdClient() {
+		return idClient;
 	}
 
-	public Long getId() {
-		return id_client;
+	public void setIdClient(Integer idClient) {
+		this.idClient = idClient;
 	}
 
 	public String getNom() {
@@ -55,19 +85,19 @@ public abstract class Client {
 		this.nom = nom;
 	}
 
-	public Integer getNumeroTel() {
+	public String getNumeroTel() {
 		return numeroTel;
 	}
 
-	public void setNumeroTel(Integer numeroTel) {
+	public void setNumeroTel(String numeroTel) {
 		this.numeroTel = numeroTel;
 	}
 
-	public Integer getNumeroFax() {
+	public String getNumeroFax() {
 		return numeroFax;
 	}
 
-	public void setNumeroFax(Integer numeroFax) {
+	public void setNumeroFax(String numeroFax) {
 		this.numeroFax = numeroFax;
 	}
 
@@ -78,7 +108,6 @@ public abstract class Client {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public Adresse getAdresse() {
 		return adresse;
@@ -96,13 +125,31 @@ public abstract class Client {
 		this.login = login;
 	}
 
-	public String getTypeClient() {
-		return typeClient;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idClient == null) ? 0 : idClient.hashCode());
+		return result;
 	}
 
-	public void setTypeClient(String typeClient) {
-		this.typeClient = typeClient;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Client other = (Client) obj;
+		if (idClient == null) {
+			if (other.idClient != null)
+				return false;
+		} else if (!idClient.equals(other.idClient))
+			return false;
+		return true;
 	}
 
+	
 	
 }
