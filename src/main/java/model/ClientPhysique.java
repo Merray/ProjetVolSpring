@@ -1,8 +1,16 @@
 package model;
 
-public class ClientPhysique extends Client {
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
+@Entity
+@DiscriminatorValue("P")
+public class ClientPhysique extends Client {
+	
+	@Column(name="titre")
 	private String titre;
+	@Column(name="prenom")
 	private String prenom;
 
 	public ClientPhysique() {
@@ -10,24 +18,12 @@ public class ClientPhysique extends Client {
 
 	}
 
-	public ClientPhysique(String typeClient,String prenom, String nom, Integer numeroTel, Integer numeroFax, String email,
-			Adresse adresse, String titre) {
-		super(typeClient, nom, numeroTel, numeroFax, email, adresse);
-		this.prenom = prenom;
-		this.titre = titre;
+	public String getTitre() {
+		return titre;
 	}
 
-	public ClientPhysique(String typeClient,String prenom, String nom, Integer numeroTel, Integer numeroFax, String email,
-			Adresse adresse, Login login, String titre) {
-		super(typeClient, nom, numeroTel, numeroFax, email, adresse, login);
-		this.prenom = prenom;
+	public void setTitre(String titre) {
 		this.titre = titre;
-	}
-
-	public ClientPhysique(String typeClient, String prenom, String nom, Integer numeroTel, Integer numeroFax, String email,
-			Adresse adresse) {
-		super(typeClient, nom, numeroTel, numeroFax, email, adresse);
-		this.prenom = prenom;
 	}
 
 	public String getPrenom() {
@@ -38,8 +34,13 @@ public class ClientPhysique extends Client {
 		this.prenom = prenom;
 	}
 
-	public String getTitre() {
-		return titre;
+	public ClientPhysique(String nom, String numeroTel, String numeroFax, String email, Adresse adresse, String titre,
+			String prenom) {
+		super(nom, numeroTel, numeroFax, email, adresse);
+		this.titre = titre;
+		this.prenom = prenom;
 	}
+
+	
 
 }

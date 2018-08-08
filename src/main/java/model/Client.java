@@ -2,11 +2,13 @@ package model;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,11 +44,12 @@ public abstract class Client {
 	            @AttributeOverride(name = "pays", column = @Column(name = "pays_client"))})
 	private Adresse adresse;
 	
-	@Deprecated
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy="client")
 	private Login login;
 
-	public Client(String typeClient,String nom, String numeroTel, String numeroFax, String email, Adresse adresse) {
+	public Client(String nom, String numeroTel, String numeroFax, String email, Adresse adresse) {
 		super();
 		this.nom = nom;
 		this.numeroTel = numeroTel;
@@ -55,7 +58,7 @@ public abstract class Client {
 		this.adresse = adresse;
 	}
 
-	public Client(String typeClient, String nom, String numeroTel, String numeroFax, String email, Adresse adresse, Login login) {
+	public Client( String nom, String numeroTel, String numeroFax, String email, Adresse adresse, Login login) {
 		super();
 		this.nom = nom;
 		this.numeroTel = numeroTel;
