@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table
@@ -35,7 +36,9 @@ public class Reservation {
 	@ManyToOne
 	@JoinColumn(name = "id_vol")
 	private Vol vol;
-
+	
+	@Version
+	private int version;
 
 	public Reservation(Long id_reservation, Date date, Long numero, Passager passager, Client client, Vol vol) {
 		super();
@@ -56,6 +59,14 @@ public class Reservation {
 		this.vol = vol;
 	}
 
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
 
 	public Long getIdReservation() {
 		return idReservation;

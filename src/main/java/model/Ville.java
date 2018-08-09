@@ -33,6 +33,17 @@ public class Ville {
 		
 	}
 
+	
+	public int getVersion() {
+		return version;
+	}
+
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}
