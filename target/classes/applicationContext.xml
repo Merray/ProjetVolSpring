@@ -12,7 +12,11 @@
 		
 		
 	<context:annotation-config></context:annotation-config>
+<<<<<<< HEAD
+	<context:component-scan base-package="dao, model"></context:component-scan>
+=======
 	<context:component-scan base-package="model"></context:component-scan>
+>>>>>>> 6ba5fddd99ce31792657c57a25c7fae7f51eb5f4
 	
 	
 	<context:property-placeholder location="classpath:sgbd.properties"/>
@@ -27,7 +31,11 @@
 	</bean>
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
+<<<<<<< HEAD
+		<property name="packagesToScan" value="model, dao"></property>
+=======
 		<property name="packagesToScan" value="model"></property>
+>>>>>>> 6ba5fddd99ce31792657c57a25c7fae7f51eb5f4
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="databasePlatform" value="${db.dialect}"></property>

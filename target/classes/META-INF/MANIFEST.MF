@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
+Built-By: ajc
+Build-Jdk: 1.8.0_181
+=======
 Built-By: AJC
 Build-Jdk: 1.8.0_171
+>>>>>>> 6ba5fddd99ce31792657c57a25c7fae7f51eb5f4
 Created-By: Maven Integration for Eclipse
 
