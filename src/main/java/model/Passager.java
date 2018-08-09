@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -28,7 +30,7 @@ public class Passager {
 	private String prenomPassager;
 	@OneToMany
 	@JoinColumn (name= "id_reservation")
-	private Reservation Reservation;
+	private List<Reservation> reservations;
 	@Embedded
     @AttributeOverrides({ @AttributeOverride(name = "adresse", column = @Column(name = "adresse_passager", length = 255)),
             @AttributeOverride(name = "codePostal", column = @Column(name = "code_postal_passager", length = 6)),
@@ -53,15 +55,6 @@ public class Passager {
 	
 	
 
-	public Passager(Integer idPassager, String nomPassager, String prenomPassager, model.Reservation reservation,
-			Adresse adressePassager) {
-		super();
-		this.idPassager = idPassager;
-		this.nomPassager = nomPassager;
-		this.prenomPassager = prenomPassager;
-		Reservation = reservation;
-		this.adressePassager = adressePassager;
-	}
 
 	public Passager() {
 		super();
@@ -99,13 +92,39 @@ public class Passager {
 		this.adressePassager = adressePassager;
 	}
 
-	public Reservation getReservation() {
-		return Reservation;
+	public List<Reservation> getReservations() {
+		return reservations;
 	}
 
-	public void setReservation(Reservation reservation) {
-		Reservation = reservation;
-	} 
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idPassager == null) ? 0 : idPassager.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Passager other = (Passager) obj;
+		if (idPassager == null) {
+			if (other.idPassager != null)
+				return false;
+		} else if (!idPassager.equals(other.idPassager))
+			return false;
+		return true;
+	}
+
 	
 	
 	

@@ -19,9 +19,9 @@ public class Reservation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqReservation")
-	@SequenceGenerator(name = "seqreservation", sequenceName = "seq_reservation", initialValue = 100, allocationSize = 1)
+	@SequenceGenerator(name = "seqReservation", sequenceName = "seq_reservation", initialValue = 100, allocationSize = 1)
 	@Column(name = "id_reservation")
-	private Long id_reservation;
+	private Long idReservation;
 	@Column(name = "date_reservation")
 	private Date date;
 	@Column(name = "no_reservation")
@@ -39,7 +39,7 @@ public class Reservation {
 
 	public Reservation(Long id_reservation, Date date, Long numero, Passager passager, Client client, Vol vol) {
 		super();
-		this.id_reservation = id_reservation;
+		this.idReservation = id_reservation;
 		this.date = date;
 		this.numero = numero;
 		this.passager = passager;
@@ -56,12 +56,13 @@ public class Reservation {
 		this.vol = vol;
 	}
 
-	public Long getId_reservation() {
-		return id_reservation;
+
+	public Long getIdReservation() {
+		return idReservation;
 	}
 
-	public void setId_reservation(Long id_reservation) {
-		this.id_reservation = id_reservation;
+	public void setIdReservation(Long idReservation) {
+		this.idReservation = idReservation;
 	}
 
 	public Date getDate() {

@@ -16,11 +16,11 @@ public interface PassagerRepository extends JpaRepository<Passager, Integer>{
 	
 	List<Passager> findBynomPassager(String nomPassager);
 	
-	List<Passager> findBnomPassagerContaining(String nomPassager);
+	List<Passager> findBynomPassagerContaining(String nomPassager);
 	
-	List<Passager> findbprenomPassagerAndnomPassager(String prenomPassager,String nomPassager);
-	
-	List<Passager> findByReservation(Reservation Reservation);
-	
+//	List<Passager> findByprenomPassagerAndnomPassager(String prenomPassager,String nomPassager);
+//	
+//	List<Passager> findByReservation(Reservation Reservation);
+//	
 	List<Passager> findByadressePassager(Adresse adressePassager);
 }
