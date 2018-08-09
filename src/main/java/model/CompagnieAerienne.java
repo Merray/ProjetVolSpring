@@ -24,7 +24,7 @@ public class CompagnieAerienne {
 	private Integer id;
 	@Column(name = "nom")
 	private String nom;
-	@OneToMany(mappedBy = "key.compagniesAeriennes", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "key.compagnieAerienne", fetch = FetchType.LAZY)
 	private List<CompagnieAerienneVol> vols;
 	@Version
 	private int version;

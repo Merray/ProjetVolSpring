@@ -20,11 +20,11 @@ public class Ville {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seqVille")
-	@Column(name="id_ville")
+	@Column(name="ville_id")
 	private Integer id;
 	@Column(name="nom")
 	private String nom;
-	@OneToMany(mappedBy = "key.villes", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "key.ville", fetch = FetchType.LAZY)
 	private List<VilleAeroport> aeroports;
 	@Version
 	private int version;

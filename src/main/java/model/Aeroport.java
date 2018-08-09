@@ -21,7 +21,7 @@ public class Aeroport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqAeroport")
-	@Column(name = "id_aeroport")
+	@Column(name = "aeroport_id")
 	private Integer id_aeroport;
 
 	@Column(name = "nom")
@@ -33,10 +33,10 @@ public class Aeroport {
 	@OneToMany(mappedBy = "aeroportDepart")
 	private List<Vol> VolsDepart;
 
-	@OneToMany(mappedBy = "key.aeroports", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "key.aeroport", fetch = FetchType.LAZY)
 	private List<VilleAeroport> villes;
 
-	@OneToMany(mappedBy = "key.aeroports", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "key.aeroport", fetch = FetchType.LAZY)
 	private List<Escale> vols;
 
 	public Integer getId_aeroport() {

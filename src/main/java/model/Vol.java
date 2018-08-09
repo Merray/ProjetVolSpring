@@ -44,7 +44,7 @@ public class Vol {
 	@Column(name = "heure_arrivee")
 	private Date heure_Arrivee;
 
-	@OneToMany(mappedBy = "key.vols", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "key.vol", fetch = FetchType.LAZY)
 	private List<CompagnieAerienneVol> compagniesAeriennes;
 
 	@ManyToOne
@@ -58,7 +58,7 @@ public class Vol {
 	@OneToMany(mappedBy = "vol")
 	private List<Reservation> reservations;
 
-	@OneToMany(mappedBy = "key.vols")
+	@OneToMany(mappedBy = "key.vol")
 	private List<Escale> aeroports;
 
 	@Version

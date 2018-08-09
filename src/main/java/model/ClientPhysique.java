@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("P")
 public class ClientPhysique extends Client {
-	
 	@Column(name="titre")
 	private String titre;
 	@Column(name="prenom")
