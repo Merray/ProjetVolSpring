@@ -1,6 +1,6 @@
 package model;
 
-import java.awt.Window.Type;
+import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -16,9 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -54,6 +53,9 @@ public abstract class Client {
 	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	@Nullable
 	private Login login;
+	
+	@OneToMany(mappedBy="client")
+	private List<Reservation> reservations;
 	
 	
 	@Version

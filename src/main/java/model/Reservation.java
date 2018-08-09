@@ -30,7 +30,7 @@ public class Reservation {
 	@ManyToOne
 	@JoinColumn(name = "id_passager")
 	private Passager passager;
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "id_client")
 	private Client client;
 	@ManyToOne
