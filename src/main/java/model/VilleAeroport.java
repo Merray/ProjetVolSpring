@@ -1,5 +1,6 @@
 package model;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -8,6 +9,7 @@ import javax.persistence.Version;
 @Table(name="ville_aeroport")
 public class VilleAeroport {
 
+	@EmbeddedId
 	private VilleAeroportPk key;
 	@Version
 	private int version;
