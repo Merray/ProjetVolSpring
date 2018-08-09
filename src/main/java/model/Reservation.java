@@ -15,12 +15,12 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity
-@Table
+@Table (name="reservation")
+@SequenceGenerator(name = "seqReservation", sequenceName = "seq_reservation", initialValue = 100, allocationSize = 1)
 public class Reservation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqReservation")
-	@SequenceGenerator(name = "seqReservation", sequenceName = "seq_reservation", initialValue = 100, allocationSize = 1)
 	@Column(name = "id_reservation")
 	private Long idReservation;
 	@Column(name = "date_reservation")
@@ -59,6 +59,7 @@ public class Reservation {
 		this.vol = vol;
 	}
 
+	public Reservation() {};
 
 	public int getVersion() {
 		return version;

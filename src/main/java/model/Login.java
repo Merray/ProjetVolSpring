@@ -14,7 +14,7 @@ import javax.persistence.Version;
 
 @Entity
 @Table(name= "login")
-@SequenceGenerator(name = "seqLogin", sequenceName = "seq_login", initialValue = 50, allocationSize = 1)
+@SequenceGenerator(name = "seqLogin", sequenceName = "seq_login", initialValue = 1, allocationSize = 1)
 public class Login {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqLogin")

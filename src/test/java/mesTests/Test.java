@@ -1,17 +1,21 @@
 package mesTests;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import model.Adresse;
+import model.Aeroport;
 import model.ClientEI;
 import model.ClientMoral;
 import model.ClientPhysique;
+import model.CompagnieAerienne;
 import model.Login;
+import model.Passager;
+import model.Reservation;
+import repositories.AeroportRepository;
 import repositories.ClientRepository;
 import repositories.LoginRepository;
+import repositories.PassagerRepository;
+import repositories.ReservationRepository;
 
 public class Test {
 	public static void main(String[] args) {
@@ -19,6 +23,10 @@ public class Test {
 	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 	ClientRepository clientR= ctx.getBean(ClientRepository.class);
 	LoginRepository loginR=ctx.getBean(LoginRepository.class);
+	ReservationRepository reservationR=ctx.getBean(ReservationRepository.class);
+	PassagerRepository passagerR=ctx.getBean(PassagerRepository.class);
+	AeroportRepository aeroportR=ctx.getBean(AeroportRepository.class);
+	
 	Adresse a1 = new Adresse("40 rue des lilas", "94140", "Alfortville", "France");
 	Login l1 = new Login("Toto", "password", false);
 	Adresse a2 = new Adresse("22 rue des oliviers", "44115", "Basse-Goulaine", "France");
@@ -32,12 +40,12 @@ public class Test {
 	cei.setLogin(l1);
 	
 	ClientMoral cm = new ClientMoral("Johnson&Jonhson", "02.00.00.00.00", "00.00.00.00.00", "bliblou@gmail.fr", a2, "EJ", "01554645BN");
-	cm.setLogin(l3);
+	cm.setLogin(l2);
 	
 	ClientPhysique cp = new ClientPhysique("Dufeu", "c'est secret", "aucun", "Thibault.Dufeu@Sopra.fr", a3, "Mlle", "Thibault");
 	
 	cei=clientR.save(cei);
-//	clientR.save(cm);
+	clientR.save(cm);
 	cp=clientR.save(cp);
 	cp.setLogin(l3);
 	cp=clientR.save(cp);
@@ -46,6 +54,30 @@ public class Test {
 	l3=cp.getLogin();
 	l3.setLogin("monLogin");
 	l3=loginR.save(l3);
+	
+	Passager passager = new Passager("Dufeu", "Thibault", cp.getAdresse());
+	passagerR.save(passager);
+	
+	Reservation reserv= new Reservation();
+	reserv.setClient(cp);
+	reserv.setPassager(passager);
+	reservationR.save(reserv);
+	
+	Aeroport aeroport = new Aeroport();
+	aeroport.setNom("Charles de Gaules");
+	aeroportR.save(aeroport);
+	
+	CompagnieAerienne comp= new CompagnieAerienne();
+	comp.setNom("LowCost");
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	ctx.close();
 	
 	}

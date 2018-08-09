@@ -7,6 +7,7 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,30 +19,31 @@ import javax.persistence.Version;
 
 @Entity
 @Table
+@SequenceGenerator(name = "seqPassager", sequenceName = "seq_passager", initialValue = 1, allocationSize = 1)
 public class Passager {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqAdherent")
-	@SequenceGenerator(name = "seqpassager", sequenceName = "seq_passager", initialValue = 100, allocationSize = 1)
 	@Column(name = "id_passager")
 	private Integer idPassager;
 	@Column(name = "nom_passager", length = 100, nullable = false)
 	private String nomPassager;
 	@Column(name = "prenom_passager", length = 150)
 	private String prenomPassager;
-	@OneToMany
-	@JoinColumn (name= "id_reservation")
+
+	@OneToMany(mappedBy="passager" ,fetch = FetchType.LAZY)
 	private List<Reservation> reservations;
 	@Embedded
-    @AttributeOverrides({ @AttributeOverride(name = "adresse", column = @Column(name = "adresse_passager", length = 255)),
-            @AttributeOverride(name = "codePostal", column = @Column(name = "code_postal_passager", length = 6)),
-            @AttributeOverride(name = "ville", column = @Column(name = "ville_passager", length = 150)), 
-			@AttributeOverride(name = "pays", column = @Column(name = "pays_passager"))})
+	@AttributeOverrides({
+			@AttributeOverride(name = "adresse", column = @Column(name = "adresse_passager", length = 255)),
+			@AttributeOverride(name = "codePostal", column = @Column(name = "code_postal_passager", length = 6)),
+			@AttributeOverride(name = "ville", column = @Column(name = "ville_passager", length = 150)),
+			@AttributeOverride(name = "pays", column = @Column(name = "pays_passager")) })
 	private Adresse adressePassager;
-	
+
 	@Version
 	private int version;
-	
+
 	public Passager(Integer idPassager, String nomPassager, String prenomPassager, Adresse adressePassager) {
 		super();
 		this.idPassager = idPassager;
@@ -134,9 +136,4 @@ public class Passager {
 		return true;
 	}
 
-	
-	
-	
-	
-	
 }
