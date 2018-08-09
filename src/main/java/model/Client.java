@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Window.Type;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
@@ -16,9 +18,12 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
+
+import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name = "client")
@@ -46,9 +51,10 @@ public abstract class Client {
 	            @AttributeOverride(name = "pays", column = @Column(name = "pays_client"))})
 	private Adresse adresse;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_login")
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@Nullable
 	private Login login;
+	
 	
 	@Version
 	private int version;
@@ -61,6 +67,9 @@ public abstract class Client {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+	public Client() {
+		super();
 	}
 
 	public Client(String nom, String numeroTel, String numeroFax, String email, Adresse adresse) {
@@ -82,9 +91,6 @@ public abstract class Client {
 		this.login = login;
 	}
 
-	public Client() {
-		super();
-	}
 
 	public Integer getIdClient() {
 		return idClient;

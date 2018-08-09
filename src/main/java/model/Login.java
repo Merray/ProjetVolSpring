@@ -7,7 +7,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -20,7 +19,7 @@ public class Login {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqLogin")
 	@Column(name="id_login")
-	private Long id;
+	private Integer id;
 	@Column(name="login", length=100)
 	private String login;
 	@Column(name="password", length=100)
@@ -28,15 +27,16 @@ public class Login {
 	@Column(name="admin")
 	private Boolean admin;
 	
-//	@OneToOne(fetch = FetchType.LAZY,
-//            cascade =  CascadeType.ALL,
-//            mappedBy="login",
-//            optional=false)
-	
+	@OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy="login")
 	private Client client;
 	@Version
 	private int version;
 
+	public Login() {
+		super();
+	}
 	public Login(String login, String motDePasse, Boolean admin) {
 		super();
 		this.login = login;
@@ -52,11 +52,8 @@ public class Login {
 		this.client = client;
 	}
 
-	public Login() {
-		super();
-	}
 
-	public Login(Long id, String login, String motDePasse, Boolean admin, Client client, int version) {
+	public Login(Integer id, String login, String motDePasse, Boolean admin, Client client, int version) {
 		super();
 		this.id = id;
 		this.login = login;
@@ -66,11 +63,11 @@ public class Login {
 		this.version = version;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
