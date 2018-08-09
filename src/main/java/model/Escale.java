@@ -3,14 +3,24 @@ package model;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-@Embeddable
+@Entity
 public class Escale {
 
+	@EmbeddedId
+	private EscalePk key;
+	@Temporal(TemporalType.DATE)
 	@Column(name="heure_depart")
 	private Date heureDepart;
+	
 	@Column(name="heure_arrivee")
+	@Temporal(TemporalType.DATE)
 	private Date heureArrivee;
 	
 	public Escale() {
