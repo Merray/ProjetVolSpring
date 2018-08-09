@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("EI")
-public class ClientEl extends Client {
+public class ClientEI extends Client {
 
 	@Column(name="titre")
 	private String titre;
@@ -14,19 +14,19 @@ public class ClientEl extends Client {
 	private String prenom;
 	
 	
-	public ClientEl() {
+	public ClientEI() {
 		super();
 
 	}
 
 
-	public ClientEl(String nom, String numeroTel, String numeroFax, String email, Adresse adresse, Login login) {
+	public ClientEI(String nom, String numeroTel, String numeroFax, String email, Adresse adresse, Login login) {
 		super(nom, numeroTel, numeroFax, email, adresse, login);
 		
 	}
 
 
-	public ClientEl(String nom, String numeroTel, String numeroFax, String email, Adresse adresse, Login login, String titre,
+	public ClientEI(String nom, String numeroTel, String numeroFax, String email, Adresse adresse, Login login, String titre,
 			String prenom) {
 		super(nom, numeroTel, numeroFax, email, adresse, login);
 		this.titre = titre;
@@ -34,13 +34,13 @@ public class ClientEl extends Client {
 	}
 
 
-	public ClientEl(String nom, String numeroTel, String numeroFax, String email, Adresse adresse) {
+	public ClientEI(String nom, String numeroTel, String numeroFax, String email, Adresse adresse) {
 		super(nom, numeroTel, numeroFax, email, adresse);
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public ClientEl(String nom, String numeroTel, String numeroFax, String email, Adresse adresse, String titre,
+	public ClientEI(String nom, String numeroTel, String numeroFax, String email, Adresse adresse, String titre,
 			String prenom) {
 		super(nom, numeroTel, numeroFax, email, adresse);
 		this.titre = titre;
