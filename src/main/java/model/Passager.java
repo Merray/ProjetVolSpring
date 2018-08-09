@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,6 +26,9 @@ public class Passager {
 	private String nomPassager;
 	@Column(name = "prenom_passager", length = 150)
 	private String prenomPassager;
+	@OneToMany
+	@JoinColumn (name= "id_reservation")
+	private Reservation Reservation;
 	@Embedded
     @AttributeOverrides({ @AttributeOverride(name = "adresse", column = @Column(name = "adresse_passager", length = 255)),
             @AttributeOverride(name = "codePostal", column = @Column(name = "code_postal_passager", length = 6)),
@@ -43,6 +48,18 @@ public class Passager {
 		super();
 		this.nomPassager = nomPassager;
 		this.prenomPassager = prenomPassager;
+		this.adressePassager = adressePassager;
+	}
+	
+	
+
+	public Passager(Integer idPassager, String nomPassager, String prenomPassager, model.Reservation reservation,
+			Adresse adressePassager) {
+		super();
+		this.idPassager = idPassager;
+		this.nomPassager = nomPassager;
+		this.prenomPassager = prenomPassager;
+		Reservation = reservation;
 		this.adressePassager = adressePassager;
 	}
 
@@ -80,6 +97,14 @@ public class Passager {
 
 	public void setAdressePassager(Adresse adressePassager) {
 		this.adressePassager = adressePassager;
+	}
+
+	public Reservation getReservation() {
+		return Reservation;
+	}
+
+	public void setReservation(Reservation reservation) {
+		Reservation = reservation;
 	} 
 	
 	
