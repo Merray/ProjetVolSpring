@@ -2,6 +2,7 @@ package model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Version;
 
 @Embeddable
 public class Adresse {
@@ -25,6 +26,7 @@ public class Adresse {
 	public Adresse() {
 		super();
 	}
+
 
 	public String getAdresse() {
 		return adresse;

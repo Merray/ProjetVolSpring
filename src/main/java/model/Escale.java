@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 @Entity
 public class Escale {
@@ -23,9 +24,34 @@ public class Escale {
 	@Temporal(TemporalType.DATE)
 	private Date heureArrivee;
 	
+	@Version
+	private int version;
+	
 	public Escale() {
 		
 	}
+	
+	public EscalePk getKey() {
+		return key;
+	}
+
+	public void setKey(EscalePk key) {
+		this.key = key;
+	}
+
+
+
+	public int getVersion() {
+		return version;
+	}
+
+
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+
 
 	public Date getHeureDepart() {
 		return heureDepart;

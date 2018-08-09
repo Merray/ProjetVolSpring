@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name= "login")
@@ -28,6 +29,7 @@ public class Login {
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name="id_client")
 	private Client client;
+	@Version
 	private int version;
 
 	public Login(String login, String motDePasse, Boolean admin) {

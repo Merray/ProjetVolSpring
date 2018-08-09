@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import org.hibernate.annotations.GeneratorType;
 
@@ -38,6 +39,18 @@ public class Aeroport {
 
 	@OneToMany(mappedBy = "key.aeroport", fetch = FetchType.LAZY)
 	private List<Escale> vols;
+
+	@Version
+	private int version;
+	
+	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
 
 	public Integer getId_aeroport() {
 		return id_aeroport;

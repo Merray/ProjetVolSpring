@@ -17,6 +17,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name = "client")
@@ -48,6 +49,19 @@ public abstract class Client {
             cascade =  CascadeType.ALL,
             mappedBy="client")
 	private Login login;
+	
+	@Version
+	private int version;
+	
+	
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
 
 	public Client(String nom, String numeroTel, String numeroFax, String email, Adresse adresse) {
 		super();

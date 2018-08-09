@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table
@@ -38,6 +39,9 @@ public class Passager {
 			@AttributeOverride(name = "pays", column = @Column(name = "pays_passager"))})
 	private Adresse adressePassager;
 	
+	@Version
+	private int version;
+	
 	public Passager(Integer idPassager, String nomPassager, String prenomPassager, Adresse adressePassager) {
 		super();
 		this.idPassager = idPassager;
@@ -52,9 +56,14 @@ public class Passager {
 		this.prenomPassager = prenomPassager;
 		this.adressePassager = adressePassager;
 	}
-	
-	
 
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
 
 	public Passager() {
 		super();
