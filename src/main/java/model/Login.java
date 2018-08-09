@@ -1,5 +1,6 @@
 package model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,8 +27,12 @@ public class Login {
 	private String motDePasse;	
 	@Column(name="admin")
 	private Boolean admin;
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="id_client")
+	
+//	@OneToOne(fetch = FetchType.LAZY,
+//            cascade =  CascadeType.ALL,
+//            mappedBy="login",
+//            optional=false)
+	
 	private Client client;
 	@Version
 	private int version;

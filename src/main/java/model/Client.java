@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -45,9 +46,8 @@ public abstract class Client {
 	            @AttributeOverride(name = "pays", column = @Column(name = "pays_client"))})
 	private Adresse adresse;
 	
-	@OneToOne(fetch = FetchType.LAZY,
-            cascade =  CascadeType.ALL,
-            mappedBy="client")
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="id_login")
 	private Login login;
 	
 	@Version
