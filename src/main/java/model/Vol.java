@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -33,43 +32,41 @@ public class Vol {
 	@Column(name = "id_vol")
 	private Long id_vol;
 	@Temporal(TemporalType.DATE)
-	@Column(name="date_depart")
+	@Column(name = "date_depart")
 	private Date date_Depart;
 	@Temporal(TemporalType.DATE)
-	@Column(name="date_arrivee")
+	@Column(name = "date_arrivee")
 	private Date date_Arrivee;
 	@Temporal(TemporalType.DATE)
-	@Column(name="heure_depart")
+	@Column(name = "heure_depart")
 	private Date heure_Depart;
 	@Temporal(TemporalType.DATE)
-	@Column(name="heure_arrivee")
+	@Column(name = "heure_arrivee")
 	private Date heure_Arrivee;
-	
+
 	@OneToMany(mappedBy = "key.vols", fetch = FetchType.LAZY)
-    private List<CompagnieAerienneVol> compagniesAeriennes;
-    
+	private List<CompagnieAerienneVol> compagniesAeriennes;
+
 	@ManyToOne
-	@JoinColumn(aeroportDepart_id)
+	@JoinColumn(name = "aeroportDepart_id")
 	private Aeroport aeroportDepart;
-	
-	@OneToOne
+
+	@ManyToOne
+	@JoinColumn(name = "aeroportArrivee_id")
 	private Aeroport aeroportArrivee;
-	
+
+	@OneToMany(mappedBy = "vol")
+	private List<Reservation> reservations;
+
 	@Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name="heure_depart", column= @Column(name="heure_depart_escale")),
-        @AttributeOverride(name="heure_arrivee", column= @Column(name="heure_arrivee_escale"))
-    })
-    private List<Escale> escales;
-	
-	
-	
+	@AttributeOverrides({ @AttributeOverride(name = "heure_depart", column = @Column(name = "heure_depart_escale")),
+			@AttributeOverride(name = "heure_arrivee", column = @Column(name = "heure_arrivee_escale")) })
+	private List<Escale> escales;
+
 	@Version
-    private int version;
-	
+	private int version;
 
 	public Vol() {
-		super();
 	}
 
 	public Vol(Date date_Depart, Date date_Arrivee, Date heure_Depart, Date heure_Arrivee) {
@@ -115,9 +112,9 @@ public class Vol {
 	public Long getId() {
 		return id_vol;
 	}
-	
+
 	public void setId(Long id_vol) {
-		this.id_vol=id_vol;
+		this.id_vol = id_vol;
 	}
 
 }
